@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
 @Entity
 @Table
 public class Task {
@@ -23,9 +22,12 @@ public class Task {
 	private String priority;
 	private Date creationDate;
 	private Date lastUpdate;
+	private Boolean isCompleted;
 
 	public Task() {
-
+		this.creationDate = new Date();
+		this.lastUpdate = new Date();
+		this.isCompleted = false;
 	}
 
 	public Task(String title, String description, String priority) {
@@ -34,9 +36,9 @@ public class Task {
 		this.priority = priority;
 		this.creationDate = new Date();
 		this.lastUpdate = new Date();
+		this.isCompleted = false;
 	}
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -71,6 +73,18 @@ public class Task {
 
 	public Date getCreationDate() {
 		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Boolean getIsCompleted() {
+		return isCompleted;
+	}
+
+	public void setIsCompleted(Boolean isCompleted) {
+		this.isCompleted = isCompleted;
 	}
 
 	public Date getLastUpdate() {
