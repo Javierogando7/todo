@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+
 @Entity
 @Table
 public class Task {
@@ -16,7 +17,7 @@ public class Task {
 	@Id
 	@SequenceGenerator(name = "task_sequence", sequenceName = "task_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_sequence")
-	private int id;
+	private Long id;
 	private String title;
 	private String description;
 	private String priority;
@@ -36,11 +37,11 @@ public class Task {
 	}
 
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -70,10 +71,6 @@ public class Task {
 
 	public Date getCreationDate() {
 		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public Date getLastUpdate() {
