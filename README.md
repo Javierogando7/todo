@@ -4,7 +4,7 @@ TODO
 
 <div align="center">
 
-TODO is an Java, Spring Boot task management web api.
+TODO is a Java, Spring Boot example task management web API.
 
 </div>
 
