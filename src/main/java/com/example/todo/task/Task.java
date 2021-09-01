@@ -19,7 +19,7 @@ public class Task {
 	private Long id;
 	private String title;
 	private String description;
-	private String priority;
+	private TaskPriority priority;
 	private Date creationDate;
 	private Date lastUpdate;
 	private Boolean isCompleted;
@@ -28,9 +28,11 @@ public class Task {
 		this.creationDate = new Date();
 		this.lastUpdate = new Date();
 		this.isCompleted = false;
+		this.description = "";
+		this.priority = TaskPriority.NO_PRIORITY;
 	}
 
-	public Task(String title, String description, String priority) {
+	public Task(String title, String description, TaskPriority priority) {
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
@@ -63,11 +65,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public String getPriority() {
+	public TaskPriority getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(TaskPriority priority) {
 		this.priority = priority;
 	}
 

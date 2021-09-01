@@ -1,8 +1,11 @@
 package com.example.todo.task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
@@ -22,9 +27,17 @@ public class TaskController {
 		this.taskService = taskService;
 	}
 
-	@GetMapping
-	public List<Task> getAllTasks() {
-		return taskService.getAllTasks();
+	@GetMapping()
+	public List<Task> getAllTasks(@Nullable @RequestParam("search") String search) {
+		
+		List<Task> tasks = taskService.getAllTasks();
+		if (search != null && !search.isBlank()) {
+			tasks = tasks.stream().filter((t) -> {
+				return t.getTitle().toLowerCase().contains(search.toLowerCase()) 
+						||  t.getDescription().toLowerCase().contains(search.toLowerCase());
+			}).collect(Collectors.toList());
+		}
+		return tasks;
 	}
 
 	@PostMapping
